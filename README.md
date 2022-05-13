@@ -32,7 +32,7 @@ use PriceParrot\PriceParrotClient;
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
-//Create an instance with api key and secret (find these here [Backend](https://backend.priceparrot.io/api))
+//Create an instance with api key and secret (find these here https://backend.priceparrot.io/api)
 $priceparrot = new PriceParrotClient($apikey, $secret);
 
 try {
