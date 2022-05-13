@@ -38,7 +38,7 @@ class PriceParrotClient {
         }
         
         //Fetch response
-        $req = URLUtil::FetchURL($this->endpoint_url . $url, $options);
+        $req = PriceParrotConnect::FetchURL($this->endpoint_url . $url, $options);
         
         //Return JSON or throw exception
         return json_decode($req, true, 512, JSON_THROW_ON_ERROR);
