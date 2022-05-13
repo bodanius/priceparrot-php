@@ -1,0 +1,26 @@
+{
+    "name": "priceparrot",
+    "type": "library",
+    "description": "Price Parrot is a competitor price monitoring service.",
+    "homepage": "priceparrot.io",
+    "authors": [
+        {
+            "name": "Price Parrot",
+            "email": "support@priceparrot.io",
+            "homepage": "priceparrot.io"
+        }
+    ],
+    "support": {
+        "email": "support@priceparrot.io"
+    },
+    "require": {
+        "php": ">=7.1.0",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PriceParrot\\": "src/"
+        }
+    },
+    "license": "LGPL-2.1-only"
+}
