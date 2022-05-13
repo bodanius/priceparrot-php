@@ -2,12 +2,12 @@
     "name": "priceparrot/priceparrot",
     "type": "library",
     "description": "Price Parrot is a competitor price monitoring service.",
-    "homepage": "priceparrot.io",
+    "homepage": "https://priceparrot.io",
     "authors": [
         {
             "name": "Price Parrot",
             "email": "support@priceparrot.io",
-            "homepage": "priceparrot.io"
+            "homepage": "https://priceparrot.io"
         }
     ],
     "support": {
