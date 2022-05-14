@@ -6,6 +6,9 @@ We find automation really important for any modern business. Therefore we includ
 ## Why you might need it
 It is vital in e-commerce to keep pace with price movements. Overpricing your products may result in loss of customers to your competition, whilst underpricing may result in a loss of revenue. Our price monitor makes sure your pricing stays up-to-date with the market.
 
+## Subscribe your free trail
+[Subscribe](https://backend.priceparrot.io/register) now for a 14-day free trail. Check our [website](https://priceparrot.io) for more information.
+
 ## Installation & loading
 The code is also available via [Composer](https://getcomposer.org) is the recommended way to install the Price Parrot API. Just add this line to your `composer.json` file:
 
