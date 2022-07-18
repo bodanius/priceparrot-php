@@ -62,6 +62,7 @@ class PriceParrotClient {
      *      mpn <string, optional>
      *      ean <string, optional>
      *      costs <decimal, optional>
+     *      price <decimal, optional>
      *      instock <boolean, optional>
      *      maxprice <decimal, optional>
      *      active <boolean, optional>
@@ -71,6 +72,28 @@ class PriceParrotClient {
     */
     public function UpdateProduct(array $data, ?string $sku=null){
         return $this->Call('product/'.($sku != null && strlen($sku) > 0 ? $sku : 'new'), $data, 'PUT');
+    }
+    
+    /* Update a single product with your unique SKU
+     * Parameters:
+     *  data: [[
+     *      name <string>
+     *      sku <string>
+     *      brand <string, optional>
+     *      tag <string, optional>
+     *      url <string, optional>
+     *      mpn <string, optional>
+     *      ean <string, optional>
+     *      costs <decimal, optional>
+     *      price <decimal, optional>
+     *      instock <boolean, optional>
+     *      maxprice <decimal, optional>
+     *      active <boolean, optional>
+     *      matches <array, optional>
+     * ]]
+    */
+    public function ImportProducts(array $data){
+        return $this->Call('products/import', $data, 'PUT');
     }
     
     /* Delete a single product and all its matches with your unique SKU */
