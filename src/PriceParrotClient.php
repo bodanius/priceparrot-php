@@ -108,12 +108,12 @@ class PriceParrotClient {
     
     /* Add or edit a competitor */
     public function AddCompetitor(string $domain, array $post=[]){
-        return $this->Call('competitor/'.$domain, $post, 'PUT');
+        return $this->Call('competitor/'.urlencode($domain), $post, 'PUT');
     }
     
     /* Delete a competitor */
     public function RemoveCompetitor(string $domain){
-        return $this->Call('competitor/'.$domain, [], 'DELETE');
+        return $this->Call('competitor/'.urlencode($domain), [], 'DELETE');
     }
     
     /* End competitor's */
