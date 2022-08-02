@@ -104,6 +104,22 @@ class PriceParrotClient {
     /* End Product */
     
     
+    /* Competitor's */
+    
+    /* Add or edit a competitor */
+    public function AddCompetitor(string $domain, array $post=[]){
+        return $this->Call('competitor/'.$domain, $post, 'PUT');
+    }
+    
+    /* Delete a competitor */
+    public function RemoveCompetitor(string $domain){
+        return $this->Call('competitor/'.$domain, [], 'DELETE');
+    }
+    
+    /* End competitor's */
+    
+    
+    
     /* Product competitor URL's */
     
     /* Fetch all competitor URL's with your unique SKU */
