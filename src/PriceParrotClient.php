@@ -46,16 +46,16 @@ class PriceParrotClient {
     
     /* Product */
     
-    /* Fetch a single product with your unique SKU */
-    public function FetchProduct(string $sku){
-        return $this->Call('product/'.$sku, [], 'GET');
+    /* Fetch a single product with your unique Product ID */
+    public function FetchProduct(string $productid){
+        return $this->Call('product/'.$productid, [], 'GET');
     }
     
     /* Update a single product with your unique SKU
      * Parameters:
      *  data: [
      *      name <string>
-     *      sku <string, optional>, set to update the current items SKU
+     *      sku <string, optional>
      *      brand <string, optional>
      *      tag <string, optional>
      *      url <string, optional>
@@ -70,13 +70,14 @@ class PriceParrotClient {
      * ]
      * sku: <string>, empty for new items
     */
-    public function UpdateProduct(array $data, ?string $sku=null){
-        return $this->Call('product/'.($sku != null && strlen($sku) > 0 ? $sku : 'new'), $data, 'PUT');
+    public function UpdateProduct(array $data, ?string $productid=null){
+        return $this->Call('product/'.(!empty($productid) ? $productid : 'new'), $data, 'PUT');
     }
     
     /* Update a single product with your unique SKU
      * Parameters:
      *  data: [[
+     *      productid <string>
      *      name <string>
      *      sku <string>
      *      brand <string, optional>
@@ -97,8 +98,8 @@ class PriceParrotClient {
     }
     
     /* Delete a single product and all its matches with your unique SKU */
-    public function DeleteProduct(string $sku){
-        return $this->Call('product/'.$sku, [], 'DELETE');
+    public function DeleteProduct(string $productid){
+        return $this->Call('product/'.$productid, [], 'DELETE');
     }
     
     /* End Product */
@@ -123,23 +124,23 @@ class PriceParrotClient {
     /* Product competitor URL's */
     
     /* Fetch all competitor URL's with your unique SKU */
-    public function FetchProductMatches(string $sku){
-        return $this->Call('productmatch/'.$sku, [], 'GET');
+    public function FetchProductMatches(string $productid){
+        return $this->Call('productmatch/'.$productid, [], 'GET');
     }
     
     /* Add a new competitor URL with your unique SKU and the URL of the competitor */
-    public function AddProductMatch(string $sku,  string $url){
-        return $this->Call('productmatch/'.$sku, ['url' => $url], 'PUT');
+    public function AddProductMatch(string $productid,  string $url){
+        return $this->Call('productmatch/'.$productid, ['url' => $url], 'PUT');
     }
     
     /* Delete a competitor URL with your unique SKU and the URL or product-ID of the competitor */
-    public function DeleteProductMatch(string $sku, string $match){
-        return $this->Call('productmatch/'.$sku, ['url' => $match], 'DELETE');
+    public function DeleteProductMatch(string $productid, string $match){
+        return $this->Call('productmatch/'.$productid, ['url' => $match], 'DELETE');
     }
     
     /* Report a competitor URL with your unique SKU */
-    public function ReportProductMatch(string $sku, string $url, int $reason, string $comment){
-        return $this->Call('productmatch/report/'.$sku, ['url' => $url, 'reason' => $reason, 'comment' => $comment], 'PUT');
+    public function ReportProductMatch(string $productid, string $url, int $reason, string $comment){
+        return $this->Call('productmatch/report/'.$productid, ['url' => $url, 'reason' => $reason, 'comment' => $comment], 'PUT');
     }
     
     /* Search for a known product match (alpha feature) */
