@@ -26,8 +26,8 @@ class PriceParrotClient {
         $this->endpoint_apikey = $apikey;
         $this->endpoint_secret = $secret;
     }
-    
-    private function Call(string $url, ?array $post=null, string $method='GET'){
+
+    public function Call(string $url, ?array $post=null, string $method='GET'){
         //Combine API key and secret
         $auth = $this->endpoint_apikey . ' ' . $this->endpoint_secret;
         
