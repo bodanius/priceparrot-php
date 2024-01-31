@@ -129,8 +129,8 @@ class PriceParrotClient {
     }
     
     /* Add a new competitor URL with your unique SKU and the URL of the competitor */
-    public function AddProductMatch(string $productid,  string $url){
-        return $this->Call('productmatch/'.$productid, ['url' => $url], 'PUT');
+    public function AddProductMatch(string $productid,  string $url, array $settings=null){
+        return $this->Call('productmatch/'.$productid, ['url' => $url, 'settings' => $settings], 'PUT');
     }
     
     /* Delete a competitor URL with your unique SKU and the URL or product-ID of the competitor */
