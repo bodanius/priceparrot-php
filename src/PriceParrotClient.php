@@ -195,8 +195,29 @@ class PriceParrotClient {
     }
     
     /* End Dynamic pricing rules */
-    
-    
+
+
+    /* Search Discovery */
+
+    public function StartSearchDiscovery(string $productid, array $data=[]){
+        return $this->Call('searchdiscovery/'.$productid, $data, 'POST');
+    }
+
+    public function FetchSearchDiscovery(string $productid){
+        return $this->Call('searchdiscovery/'.$productid, [], 'GET');
+    }
+
+    public function SearchDiscoveryAdd(string $productid, array $data=[]){
+        return $this->Call('searchdiscovery/'.$productid, $data, 'PUT');
+    }
+
+    public function SearchDiscoveryRemove(string $productid, array $data=[]){
+        return $this->Call('searchdiscovery/'.$productid, $data, 'DELETE');
+    }
+
+    /* End Search Discovery */
+
+
     /* Summaries */
     
     public function FetchProductSummary(){
