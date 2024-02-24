@@ -197,6 +197,18 @@ class PriceParrotClient {
     /* End Dynamic pricing rules */
 
 
+    /* Alerts */
+
+    public function DeleteAlert(string $ruleid){
+        return $this->Call('alert/'.$ruleid, [], 'DELETE');
+    }
+
+    public function UpdateAlert(string $ruleid, array $data){
+        return $this->Call('alert/'.$ruleid, $data, 'PUT');
+    }
+
+    /* End Alerts */
+
     /* Search Discovery */
 
     public function StartSearchDiscovery(string $productid, array $data=[]){
