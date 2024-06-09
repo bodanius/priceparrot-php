@@ -118,7 +118,7 @@ class PriceParrotClient {
     }
 
     public function PauseCompetitor(string $domain, bool $toggle){
-        return $this->Call('competitor/'.urlencode($domain), ['pause' => $toggle], 'UPDATE');
+        return $this->Call('competitor/'.urlencode($domain), ['pause' => $toggle], 'POST');
     }
     
     /* End competitor's */
