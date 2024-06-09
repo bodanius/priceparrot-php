@@ -116,6 +116,10 @@ class PriceParrotClient {
     public function RemoveCompetitor(string $domain){
         return $this->Call('competitor/'.urlencode($domain), [], 'DELETE');
     }
+
+    public function PauseCompetitor(string $domain, boolean $toggle){
+        return $this->Call('competitor/'.urlencode($domain), ['pause' => $toggle], 'UPDATE');
+    }
     
     /* End competitor's */
     
