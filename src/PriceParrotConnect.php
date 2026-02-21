@@ -3,7 +3,7 @@
  * Price Parrot PHP API
  * https://priceparrot.io
  * 
- * PHP Version 7.1.
+ * PHP Version 8.5.
  *
  * @see       https://github.com/priceparrot/priceparrot-php
  *
@@ -22,7 +22,7 @@ class PriceParrotConnect{
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
         curl_setopt($ch, CURLOPT_VERBOSE, false);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_USERAGENT, 'Price Parrot Github API');
@@ -51,10 +51,7 @@ class PriceParrotConnect{
         }
 
         //Fetch data
-        $data = curl_exec($ch);
-        curl_close($ch);
-
-        return $data;
+        return curl_exec($ch);
     }
 }
 ?>
