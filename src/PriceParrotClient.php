@@ -3,7 +3,7 @@
  * Price Parrot PHP API
  * https://priceparrot.io
  * 
- * PHP Version 7.1.
+ * PHP Version 8.5.
  *
  * @see       https://github.com/priceparrot/priceparrot-php
  *
@@ -17,14 +17,26 @@
 
 namespace PriceParrot;
 
-class PriceParrotClient { 
+use JsonException;
+use RuntimeException;
+use InvalidArgumentException;
+
+final class PriceParrotClient { 
     private string $endpoint_url =      'https://api.parrotprice.com/';
-    private string $endpoint_apikey =   '';
-    private string $endpoint_secret =   '';
     
-    function __construct(string $apikey, string $secret) {
-        $this->endpoint_apikey = $apikey;
-        $this->endpoint_secret = $secret;
+    public function __construct(
+        private readonly string $endpoint_apikey,
+        private readonly string $endpoint_secret,
+    ) {}
+
+
+    public function setEndpoint(string $url) : void {
+        $url = trim($url);
+        if ($url === '') {
+            throw new InvalidArgumentException('Endpoint URL cannot be empty.');
+        }
+
+        $this->endpoint_url = rtrim($url, '/') . '/';
     }
 
     public function Call(string $url, ?array $post=null, string $method='GET'){
@@ -32,16 +44,33 @@ class PriceParrotClient {
         $auth = $this->endpoint_apikey . ' ' . $this->endpoint_secret;
         
         //Set options for endpoint call
-        $options = ['post' => $post, 'headers' => ['Authorization' => $auth]];
+        $options = ['headers' => ['Authorization' => $auth]];
+
+        if(!empty($post)){
+            $options['post'] => $post;
+            if($method != 'PUT' && $method != 'POST' && $method != 'DELETE'){
+                $method = 'POST';
+            }
+        }
+        
         if($method != 'GET'){
             $options['method'] = $method;
         }
         
-        //Fetch response
-        $req = PriceParrotConnect::FetchURL($this->endpoint_url . $url, $options);
+        //Fetch respons
+        try {
+            $raw = PriceParrotConnect::FetchURL($this->endpoint_url . $url, $options);
+        } catch (\Exception $e) {
+            throw new RuntimeException('Request failed: ' . $e->getMessage(), 0, $e);
+        }
         
         //Return JSON or throw exception
-        return json_decode($req, true, 512, JSON_THROW_ON_ERROR);
+        try {
+            return json_decode($raw, true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+            $preview = is_string($raw) ? substr($raw, 0, 500) : '';
+            throw new RuntimeException('Invalid JSON response. First 500 chars: ' . $preview, 0, $e);
+        }
     }
     
     /* Product */
@@ -246,11 +275,11 @@ class PriceParrotClient {
     /* Products Lists */
     
     public function FetchAllProducts(int $offset=0, int $amount=20){
-        return $this->Call('/products/list/'.$offset.'/'.$amount);
+        return $this->Call('products/list/'.$offset.'/'.$amount);
     }
     
     public function SearchAllProducts(string $search, int $offset=0, int $amount=20){
-        return $this->Call('/products/search/'.urlencode($search).'/'.$offset.'/'.$amount);
+        return $this->Call('products/search/'.urlencode($search).'/'.$offset.'/'.$amount);
     }
     
     /* End Products Lists */
