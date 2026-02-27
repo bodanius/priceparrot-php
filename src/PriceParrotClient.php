@@ -47,7 +47,7 @@ final class PriceParrotClient {
         $options = ['headers' => ['Authorization' => $auth]];
 
         if(!empty($post)){
-            $options['post'] => $post;
+            $options['post'] = $post;
             if($method != 'PUT' && $method != 'POST' && $method != 'DELETE'){
                 $method = 'POST';
             }
