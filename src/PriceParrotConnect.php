@@ -30,8 +30,11 @@ class PriceParrotConnect{
 
         //Send POST data
         if(!empty($options['post'])){
+            $data_string = json_encode($options['post'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);  
+            
             $options['headers']['Content-Type'] = 'application/json';
-            $data_string = json_encode($options['post']);                                                                 
+            $options['headers']['Content-Length'] = strlen($data_string);
+                                                 
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
         }
         
